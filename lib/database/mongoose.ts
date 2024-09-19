@@ -7,28 +7,28 @@ interface MongooseConnection {
   promise: Promise<Mongoose> | null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let cached: MongooseConnection = (global as any).mongoose
-
-if(!cached) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cached = (global as any).mongoose = { 
-    conn: null, promise: null 
-  }
+interface NodeJSGlobal {
+  mongoose?: MongooseConnection;
 }
 
-export const connectToDatabase = async () => {
-  if(cached.conn) return cached.conn;
+const cached: MongooseConnection = (global as NodeJSGlobal).mongoose || { conn: null, promise: null };
 
-  if(!MONGODB_URL) throw new Error('Missing MONGODB_URL');
+export const connectToDatabase = async (): Promise<Mongoose> => {
 
-  cached.promise = 
-    cached.promise || 
-    mongoose.connect(MONGODB_URL, { 
-      dbName: 'usagi', bufferCommands: false 
-    })
+  if (cached.conn) return cached.conn;
+
+  if (!MONGODB_URL) {
+    throw new Error('Missing MONGODB_URL');
+  }
+
+  cached.promise = cached.promise || mongoose.connect(MONGODB_URL, {
+    dbName: 'Bahia',
+    bufferCommands: false,
+  });
 
   cached.conn = await cached.promise;
 
+  (global as NodeJSGlobal).mongoose = cached;
+
   return cached.conn;
-}
+};

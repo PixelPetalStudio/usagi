@@ -1,5 +1,4 @@
-/* eslint-disable prefer-spread */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* eslint-disable prefer-const */
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
@@ -87,9 +86,9 @@ export function removeKeysFromQuery({
 }
 
 // DEBOUNCE
-export const debounce = (func: (...args: any[]) => void, delay: number) => {
+export const debounce = (func: (...args: unknown[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout | null;
-  return (...args: any[]) => {
+  return (...args: unknown[]) => {
     if (timeoutId) clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func.apply(null, args), delay);
   };
@@ -99,7 +98,7 @@ export const debounce = (func: (...args: any[]) => void, delay: number) => {
 export type AspectRatioKey = keyof typeof aspectRatioOptions;
 export const getImageSize = (
   type: string,
-  image: any,
+  image: unknown,
   dimension: "width" | "height"
 ): number => {
   if (type === "fill") {
@@ -133,7 +132,7 @@ export const download = (url: string, filename: string) => {
 };
 
 // DEEP MERGE OBJECTS
-export const deepMergeObjects = (obj1: any, obj2: any) => {
+export const deepMergeObjects = (obj1: unknown, obj2: unknown) => {
   if(obj2 === null || obj2 === undefined) {
     return obj1;
   }
