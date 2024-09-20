@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-spread */
 /* eslint-disable prefer-const */
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
@@ -153,7 +155,5 @@ export const deepMergeObjects = (obj1: any, obj2: any) => {
     }
   }
 
-  return output;
-};
   return output;
 };
