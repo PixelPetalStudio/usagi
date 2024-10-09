@@ -25,7 +25,7 @@ const ImageSchema = new Schema ({
     title: { type: String, required: true },
     transformatonType: { type: String, required: true },
     publidId: { tyoe: String, required: true },
-    secureUrl: { type: URL, required: true },
+    secureURL: { type: URL, required: true },
     width: { type: Number },
     height: { type: Number },
     config: { type: Object },

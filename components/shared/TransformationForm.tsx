@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from "@/constants"
-import { CustomField } from "./CustomField"
 import { useEffect, useState, useTransition } from "react"
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils"
 import MediaUploader from "./MediaUploader"
@@ -33,6 +32,7 @@ import { updateCredits } from "@/lib/actions/user.actions"
 import { getCldImageUrl } from "next-cloudinary"
 import { addImage, updateImage } from "@/lib/actions/image.actions"
 import { useRouter } from "next/navigation"
+import { CustomField } from "./CustomField"
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal"
  
 export const formSchema = z.object({
@@ -155,7 +155,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
         ...prevState,
         [type]: {
           ...prevState?.[type],
-          [fieldName === 'prompt' ? 'prompt' : 'to' ]: value 
+          [fieldName === 'prompt' ? 'prompt' : 'to' ]: value
         }
       }))
     }, 1000)();
@@ -187,7 +187,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {creditBalance < Math.abs(creditFee) && <InsufficientCreditsModal />}
-        <CustomField 
+        <CustomField
           control={form.control}
           name="title"
           formLabel="Image Title"
@@ -217,13 +217,13 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
                   ))}
                 </SelectContent>
               </Select>
-            )}  
+            )}
           />
         )}
 
         {(type === 'remove' || type === 'recolor') && (
           <div className="prompt-field">
-            <CustomField 
+            <CustomField
               control={form.control}
               name="prompt"
               formLabel={
@@ -231,7 +231,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
               }
               className="w-full"
               render={({ field }) => (
-                <Input 
+                <Input
                   value={field.value}
                   className="input-field"
                   onChange={(e) => onInputChangeHandler(
@@ -245,13 +245,13 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
             />
 
             {type === 'recolor' && (
-              <CustomField 
+              <CustomField
                 control={form.control}
                 name="color"
                 formLabel="Replacement Color"
                 className="w-full"
                 render={({ field }) => (
-                  <Input 
+                  <Input
                     value={field.value}
                     className="input-field"
                     onChange={(e) => onInputChangeHandler(
@@ -268,12 +268,12 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
         )}
 
         <div className="media-uploader-field">
-          <CustomField 
+          <CustomField
             control={form.control}
             name="publicId"
             className="flex size-full flex-col"
             render={({ field }) => (
-              <MediaUploader 
+              <MediaUploader
                 onValueChange={field.onChange}
                 setImage={setImage}
                 publicId={field.value}
@@ -283,7 +283,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
             )}
           />
 
-          <TransformedImage 
+          <TransformedImage
             image={image}
             type={type}
             title={form.getValues().title}
@@ -294,7 +294,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
         </div>
 
         <div className="flex flex-col gap-4">
-          <Button 
+          <Button
             type="button"
             className="submit-button capitalize"
             disabled={isTransforming || newTransformation === null}
@@ -302,7 +302,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
           >
             {isTransforming ? 'Transforming...' : 'Apply Transformation'}
           </Button>
-          <Button 
+          <Button
             type="submit"
             className="submit-button capitalize"
             disabled={isSubmitting}
