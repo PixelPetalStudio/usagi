@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CldImage } from "next-cloudinary";
 
-import { Button } from "@/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -13,10 +12,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { transformationTypes } from "@/constants";
-import { IImage } from "@/models/image.model";
+import { IImage } from "@/lib/database/models/image.model";
 import { formUrlQuery } from "@/lib/utils";
 
-import { Search } from "./search";
+import { Button } from "../ui/button";
+
+import { Search } from "./Search";
 
 export const Collection = ({
   hasSearch = false,
@@ -55,7 +56,7 @@ export const Collection = ({
       {images.length > 0 ? (
         <ul className="collection-list">
           {images.map((image) => (
-            <Card image={image} key={image._id} />
+            <Card image={image} key={image._id as string} />
           ))}
         </ul>
       ) : (

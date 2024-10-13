@@ -1,7 +1,9 @@
-import type { PropsWithChildren } from "react";
+import React from 'react'
 
-const AuthLayout = ({ children }: PropsWithChildren) => {
-  return <main className="auth">{children}</main>;
-};
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <main className="auth">{children}</main>
+  )
+}
 
-export default AuthLayout;
+export default Layout

@@ -1,13 +1,13 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Header } from "@/components/shared/header";
-import { TransformedImage } from "@/components/shared/transformed-image";
+import Header from "@/components/shared/Header";
+import TransformedImage from "@/components/shared/TransformedImage";
 import { Button } from "@/components/ui/button";
-import { getImageById } from "@/actions/image.action";
+import { getImageById } from "@/lib/actions/image.actions";
 import { getImageSize } from "@/lib/utils";
-import { DeleteConfirmation } from "@/components/shared/delete-confirmation";
+import { DeleteConfirmation } from "@/components/shared/DeleteConfirmation";
 
 const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();

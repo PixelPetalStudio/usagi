@@ -1,13 +1,11 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-prototype-builtins */
-import { type ClassValue, clsx } from "clsx";
+import { type ClassValue, clsx } from "clsx"
 import qs from "qs";
-import { twMerge } from "tailwind-merge";
+import { twMerge } from "tailwind-merge"
 
 import { aspectRatioOptions } from "@/constants";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
 // ERROR HANDLER
@@ -15,15 +13,15 @@ export const handleError = (error: unknown) => {
   if (error instanceof Error) {
     // This is a native JavaScript error (e.g., TypeError, RangeError)
     console.error(error.message);
-    throw Error(`Error: ${error.message}`);
+    throw new Error(`Error: ${error.message}`);
   } else if (typeof error === "string") {
     // This is a string error message
     console.error(error);
-    throw Error(`Error: ${error}`);
+    throw new Error(`Error: ${error}`);
   } else {
     // This is an unknown type of error
     console.error(error);
-    throw Error(`Unknown error: ${JSON.stringify(error)}`);
+    throw new Error(`Unknown error: ${JSON.stringify(error)}`);
   }
 };
 
@@ -48,7 +46,7 @@ const toBase64 = (str: string) =>
     : window.btoa(str);
 
 export const dataUrl = `data:image/svg+xml;base64,${toBase64(
-  shimmer(1000, 1000),
+  shimmer(1000, 1000)
 )}`;
 // ==== End
 
@@ -78,7 +76,7 @@ export function removeKeysFromQuery({
 
   // Remove null or undefined values
   Object.keys(currentUrl).forEach(
-    (key) => currentUrl[key] == null && delete currentUrl[key],
+    (key) => currentUrl[key] == null && delete currentUrl[key]
   );
 
   return `${window.location.pathname}?${qs.stringify(currentUrl)}`;
@@ -98,7 +96,7 @@ export type AspectRatioKey = keyof typeof aspectRatioOptions;
 export const getImageSize = (
   type: string,
   image: any,
-  dimension: "width" | "height",
+  dimension: "width" | "height"
 ): number => {
   if (type === "fill") {
     return (
@@ -112,7 +110,7 @@ export const getImageSize = (
 // DOWNLOAD IMAGE
 export const download = (url: string, filename: string) => {
   if (!url) {
-    throw Error("Resource URL not provided! You need to provide one");
+    throw new Error("Resource URL not provided! You need to provide one");
   }
 
   fetch(url)
@@ -132,7 +130,7 @@ export const download = (url: string, filename: string) => {
 
 // DEEP MERGE OBJECTS
 export const deepMergeObjects = (obj1: any, obj2: any) => {
-  if (obj2 === null || obj2 === undefined) {
+  if(obj2 === null || obj2 === undefined) {
     return obj1;
   }
 

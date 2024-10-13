@@ -3,12 +3,12 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect } from "react";
 
-import { checkoutCredits } from "@/actions/transaction.action";
 import { useToast } from "@/components/ui/use-toast";
+import { checkoutCredits } from "@/lib/actions/transaction.action";
 
 import { Button } from "../ui/button";
 
-export const Checkout = ({
+const Checkout = ({
   plan,
   amount,
   credits,
@@ -72,3 +72,5 @@ export const Checkout = ({
     </form>
   );
 };
+
+export default Checkout;
