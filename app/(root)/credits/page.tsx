@@ -1,13 +1,13 @@
-import { auth } from "@clerk/nextjs/server";
+import { SignedIn, auth } from "@clerk/nextjs";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import Header from "@/components/shared/Header";
+import { getUserById } from "@/actions/user.action";
+import { Checkout } from "@/components/shared/checkout";
+import { Header } from "@/components/shared/header";
 import { Button } from "@/components/ui/button";
 import { plans } from "@/constants";
-import { getUserById } from "@/lib/actions/user.actions";
-import { SignedIn } from "@clerk/nextjs";
-import Checkout from "@/components/shared/Checkout";
 
 const Credits = async () => {
   const { userId } = auth();
@@ -57,8 +57,8 @@ const Credits = async () => {
               </ul>
 
               {plan.name === "Free" ? (
-                <Button variant="outline" className="credits-btn">
-                  Free Consumable
+                <Button variant="outline" className="credits-btn" asChild>
+                  <Link href="/">Free Consumable</Link>
                 </Button>
               ) : (
                 <SignedIn>

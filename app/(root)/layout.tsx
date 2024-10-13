@@ -1,20 +1,19 @@
-import MobileNav from '@/components/shared/MobileNav'
-import Sidebar from '@/components/shared/Sidebar'
-import React from 'react'
+import type { PropsWithChildren } from "react";
 
-const Layout = ({ children }: { children: React.ReactNode}) => {
+import { Sidebar } from "@/components/shared/sidebar";
+import { MobileNav } from "@/components/shared/mobile-nav";
+
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <main className="root">
-      <Sidebar/> 
+      <Sidebar />
       <MobileNav />
-        
-        <div className="root-container">
-            <div className="wrapper">
-            {children}
-            </div>
-        </div>
-    </main>
-  )
-}
 
-export default Layout
+      <div className="root-container">
+        <div className="wrapper">{children}</div>
+      </div>
+    </main>
+  );
+};
+
+export default RootLayout;

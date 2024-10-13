@@ -1,20 +1,20 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { ClerkProvider } from "@clerk/nextjs";
 
-const IBMPlex = IBM_Plex_Sans({ 
+import { Toaster } from "@/components/ui/toaster";
+import { siteConfig } from "@/config";
+import { cn } from "@/lib/utils";
+
+import "./globals.css";
+
+const IBMPlex = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-ibm-plex'
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex",
 });
 
-
-export const metadata: Metadata = {
-  title: "usagi",
-  description: "AI-powered image generator",
-};
+export const metadata: Metadata = siteConfig;
 
 export default function RootLayout({
   children,
@@ -22,14 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{
-      variables: { colorPrimary: '#624cf5' }
-    }}>
-    <html lang="en">
-      <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
+    <ClerkProvider
+      appearance={{
+        variables: { colorPrimary: "#624cf5" },
+      }}
+    >
+      <html lang="en">
+        <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
           {children}
-      </body>
-    </html>
-  </ClerkProvider>
+
+          <Toaster />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

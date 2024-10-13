@@ -1,13 +1,13 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import { Collection } from "@/components/shared/Collection";
-import Header from "@/components/shared/Header";
-import { getUserImages } from "@/lib/actions/image.actions";
-import { getUserById } from "@/lib/actions/user.actions";
+import { getUserImages } from "@/actions/image.action";
+import { getUserById } from "@/actions/user.action";
+import { Collection } from "@/components/shared/collection";
+import { Header } from "@/components/shared/header";
 
-const Profile = async ({ searchParams }: SearchParamProps) => {
+const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;
   const { userId } = auth();
 
@@ -61,4 +61,4 @@ const Profile = async ({ searchParams }: SearchParamProps) => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
